@@ -26,13 +26,13 @@ int main(int argc, char** argv)
 	HANDLE currentTokenHandle = NULL;
 	BOOL getCurrentToken = OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES, &currentTokenHandle);
 	
-	if (SetPrivilege(currentTokenHandle, "SeDebugPrivilege", TRUE))
+	if (SetPrivilege(currentTokenHandle, "SeImpersonatePrivilege", TRUE))
 	{
-		printf("[+] SeDebugPrivilege enabled!\n");
+		printf("[+] SeImpersonatePrivilege enabled!\n");
 	}
 	else
 	{
-		printf("[-] SeDebugPrivilege not enabled!\n");
+		printf("[-] SeImpersonatePrivilege not enabled!\n");
 		printf("[-] Exiting!\n");
 		return 1;
 	}
