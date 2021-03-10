@@ -1,5 +1,7 @@
 # Impersonator
 
+![Image](https://github.com/plackyhacker/impersonator/blob/main/Impersonator.gif)
+
 Simple C code to impersonate the `lsass.exe` primary token and spawn a new process as `NT Authority\SYSTEM` . The `SeImpersonate` privilege is required to impersonate another process token.
 
 
