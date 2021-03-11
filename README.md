@@ -29,6 +29,8 @@ SeImpersonatePrivilege                    Impersonate a client after authenticat
 C:\Dev\>compile.bat
 ```
 
+Or download the release: https://github.com/plackyhacker/impersonator/releases/tag/v1.0.0-release
+
 
 **Run the binary**
 
