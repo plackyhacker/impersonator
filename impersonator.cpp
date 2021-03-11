@@ -2,6 +2,7 @@
 * Refs:
 * https://securitytimes.medium.com/understanding-and-abusing-process-tokens-part-i-ee51671f2cfa
 * https://institute.sektor7.net/red-team-operator-malware-development-essentials
+* https://stackoverflow.com/questions/6858524/convert-char-to-lpwstr
 */
 
 #include <windows.h>
